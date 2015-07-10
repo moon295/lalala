@@ -1,0 +1,30 @@
+#***********************************************************
+# ベーシック認証
+#***********************************************************
+#AuthType Basic
+#AuthUserFile /home/lpo/.htpasswd
+#AuthGroupFile /dev/null
+#AuthName " Login by Webmaster"
+#Require valid-user
+
+#***********************************************************
+# ディレクトリ設定
+#***********************************************************
+DirectoryIndex index.php index.html
+
+#***********************************************************
+# リライト設定
+#***********************************************************
+RewriteEngine On
+
+# トップページ
+RewriteRule ^customer[/]?$											index.php?action_customer_index=true [L]
+
+# ログイン
+RewriteRule ^customer/login[/]?$									index.php?action_customer_login_input=true [L]
+
+# 通話ログ
+RewriteRule ^customer/calllog[/]?([0-9]*)[/]?$						index.php?action_customer_calllog_list=true&current_page=$1 [L]
+
+# ログアウト
+RewriteRule ^customer/logout[/]?$									index.php?action_customer_login_logout=true [L]
